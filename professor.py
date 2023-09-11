@@ -39,23 +39,27 @@ def resolve_problems(problems):
   while i < len(problems):
     chance += 1
     try:
-      x = problems[i]["x"]
-      y = problems[i]["y"]
-      r = int(input(f"{x} + {y} = "))
-      if r == ( x + y ):
-        score += 1
-        chance = 0
-        i += 1
-      elif chance > 2:
-        print(f"{x} + {y} = {x + y}")
-        chance = 0
-        i += 1
-      else:
-        print("EEE")    
+      p = problems[i]
+      r = int(input(f"{p['x']} + {p['y']} = "))
+      score, chance, i = check(p, r, score, chance, i)  
     except ValueError:
       print("EEE")  
   print(f"Score: {score}")   
-    
+
+def check(p, r, score, chance, i):
+  if r == ( p["x"] + p["y"] ):
+    score += 1
+    chance = 0
+    i += 1
+  elif chance > 2:
+    print(f"{p['x']} + {p['y']} = {p['x'] + p['y']}")
+    chance = 0
+    i += 1
+  else:
+    print("EEE")
+  return (score, chance, i)     
+
+     
 if __name__ == "__main__":
     main()
     
