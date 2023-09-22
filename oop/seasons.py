@@ -1,24 +1,24 @@
 from datetime import date
-import inflect
 import sys
+import inflect
 import operator
 
 p = inflect.engine()
 
 
 def main():
-    try:
-        date_of_birth = input("Date of Birth: ")
-        difference = operator.sub(date.today(), date.fromisoformat(date_of_birth))
-        print(convert(difference.days))
-    except ValueError:
-        sys.exit("Invalid date")
+  date_of_birth = input("Date of Birth: ")
+  print(convert(date_of_birth))
 
 
-def convert(time):
-    minutes = time * 24 * 60
+
+def convert(date_of_birth):
+  try:
+    difference = operator.sub(date.today(), date.fromisoformat(date_of_birth))
+    minutes = difference.days * 24 * 60
     return f"{(p.number_to_words(minutes, andword='')).capitalize()} minutes"
-
+  except ValueError:
+    sys.exit("Invalid date")
 
 if __name__ == "__main__":
     main()
