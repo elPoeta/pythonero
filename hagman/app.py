@@ -8,8 +8,8 @@ def main():
     game = Game(words)
        
     
-def get_words():
-    args = get_args();
+def get_words() -> list:
+    args = get_args()
     file_name = args.f
     try:
         words = []
