@@ -1,14 +1,13 @@
 import os
 import time
-from hagman import Hagman
+from utils import clear_screen, get_args
 
 def main():
-    print(os.name)
-    print('test clear ')
-    time.sleep(1)
-    os.system('clear' if os.name == 'posix' else 'cls')
-    hagman = Hagman()
-    hagman.print_pics(0)
+    # time.sleep(1)
+    clear_screen()
+    args = get_args();
+    
+
     
 
 if __name__ == '__main__':
