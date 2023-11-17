@@ -4,9 +4,9 @@ from game import Game
 
 def main():
     clear_screen()
-    words = get_words()
-    game = Game(words)
-       
+    (words, limit) = get_words()
+    game = Game(words, limit)
+    game.start()   
     
 def get_words() -> list:
     args = get_args()
@@ -16,7 +16,7 @@ def get_words() -> list:
         with open(file_name) as file:
             for line in file:
                 words.append(line.strip())
-        return words        
+        return (words, args.l)        
     except FileNotFoundError:  
         sys.exit(f"File {file_name} does not exist") 
         
