@@ -12,7 +12,7 @@ class Game:
             try: 
                clear_screen() 
                print('[1] - 🕹️\t New Game\n')
-               print('[2] - ⬅️ Exit\n')
+               print('[2] - 🚪 Exit\n')
                option = input('Option: ')
                match option:
                   case '1':
@@ -30,4 +30,4 @@ class Game:
         clear_screen()
         word = random.choice(self.words)
         hagman = Hagman(word, self.limit_fails)
-        hagman.print_pics(4)
+        hagman.play_game()
