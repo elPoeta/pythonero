@@ -2,6 +2,6 @@
   "python.analysis.typeCheckingMode": "strict",
   "python.languageServer": "Jedi",
   "python.terminal.activateEnvironment": true,
-  "editor.defaultFormatter": "ms-python.python",
+  "editor.defaultFormatter": "ms-python.vscode-pylance",
   "pythonIndent.useTabOnHangingIndent": true
 }
