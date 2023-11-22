@@ -1,6 +1,7 @@
 import time
 import re
 from utils import clear_screen
+from color import Color
 class Hagman:
     def __init__(self, word="hello", limit_fail=5):
         self.word = list(' '.join(s for s in list(word.upper())))    
@@ -12,15 +13,15 @@ class Hagman:
         self.win = False
 
     def set_ascii_pics(self):
-        first_common_pics = "   _____      \x1b[1;32m🧩 Py-Hagman 🧩 \x1b[1;0m \n  |     |  \n  |     |     ❌ %%fails%%,  📝 %%letters%%  \n  |     "
-        last_common_pic = "__|__        \x1b[1;36m%%display%% \x1b[1;0m\n"
+        first_common_pics = f"   {Color.restore}_____      {Color.green}🧩 Py-Hagman 🧩 {Color.restore} \n  |     |  \n  |     |     ❌ {Color.red}%%fails%% {Color.restore}  📝 %%letters%%  \n  |     "
+        last_common_pic = f"__|__        {Color.cyan}%%display%% {Color.restore}\n"
         return [
              f"{first_common_pics}\n  |        \n  |        \n  |        \n{last_common_pic}",
-             f"{first_common_pics}\x1b[1;31m|\x1b[1;0m  \n  |        \n  |        \n  |        \n{last_common_pic}",
-             f"{first_common_pics}\x1b[1;31m|\x1b[1;0m  \n  |     \x1b[1;31mO\x1b[1;0m  \n  |        \n  |        \n{last_common_pic}",
-             f"{first_common_pics}|  \n  |     \x1b[1;31mO\x1b[1;0m  \n  |     \x1b[1;31m|\x1b[1;0m  \n  |        \n{last_common_pic}",
-             f"{first_common_pics}|  \n  |     \x1b[1;31mO\x1b[1;0m  \n  |    \x1b[1;31m/|\ \x1b[1;0m \n  |        \n{last_common_pic}",
-             f"{first_common_pics}|  \n  |     \x1b[1;31mO\x1b[1;0m  \n  |    \x1b[1;31m/|\ \x1b[1;0m \n  |    \x1b[1;31m/ \ \x1b[1;0m\n{last_common_pic}",
+             f"{first_common_pics}{Color.red}|{Color.restore}  \n  |        \n  |        \n  |        \n{last_common_pic}",
+             f"{first_common_pics}{Color.red}|{Color.restore}  \n  |     {Color.red}O{Color.restore}  \n  |        \n  |        \n{last_common_pic}",
+             f"{first_common_pics}|  \n  |     {Color.red}O{Color.restore}  \n  |     {Color.red}|{Color.restore}  \n  |        \n{last_common_pic}",
+             f"{first_common_pics}|  \n  |     {Color.red}O{Color.restore}  \n  |    {Color.red}/|\ {Color.restore} \n  |        \n{last_common_pic}",
+             f"{first_common_pics}|  \n  |     {Color.red}O{Color.restore}  \n  |    {Color.red}/|\ {Color.restore} \n  |    {Color.red}/ \ {Color.restore}\n{last_common_pic}",
         ]
         
     def print_pics(self, pos=0):
@@ -34,7 +35,7 @@ class Hagman:
         while self.fails < self.limit_fail:
             try:
                 self.print_pics(self.fails)
-                guess = input('💬 Enter your guess: ').strip().upper()
+                guess = input(f'💬 {Color.yellow}Enter your guess: ').strip().upper()
                 if self.is_not_letter(guess):
                     continue
                 if(self.is_guessed(guess)):
@@ -50,7 +51,7 @@ class Hagman:
         pattern = r"^[A-Za-z]*$"
         if len(guess) > 1 or not re.match(pattern, guess):
           clear_screen()  
-          print('🚫 Invalid input. Enter a single letter\n')
+          print(f'🚫 {Color.red}Invalid input. Enter a single letter{Color.restore}\n')
           time.sleep(2)      
           return True
         return False  
@@ -58,7 +59,7 @@ class Hagman:
     def is_guessed(self, guess):
         if guess in self.letters:
             clear_screen()  
-            print('🚫 Oops! You already tried that guess, try again!\n')
+            print(f'🚫 {Color.red}Oops! You already tried that guess, try again!{Color.restore}\n')
             time.sleep(2)      
             return True
         return False
@@ -79,9 +80,9 @@ class Hagman:
     def check_winner(self):
         clear_screen()
         self.print_pics(self.fails)
-        time.sleep(2)
+        time.sleep(1)
         clear_screen()
         if self.win:
-            print('YOU WIN!\n')
+            print(f'{Color.green} 🎆 YOU WIN!{Color.restore}\n')
         else:
-            print('YOU LOSE!\n')           
+            print(f'{Color.red} ❌ YOU LOSE!{Color.restore}\n')           

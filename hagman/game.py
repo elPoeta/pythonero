@@ -2,6 +2,7 @@ import sys
 import random
 from utils import clear_screen
 from hagman import Hagman
+from color import Color
 class Game:
     def __init__(self, words, limit_fails):
         self.words = words
@@ -11,20 +12,21 @@ class Game:
        while(True):
             try: 
                clear_screen() 
-               print('[1] - 🕹️\t New Game\n')
-               print('[2] - 🚪 Exit\n')
-               option = input('Option: ')
+               print(f'{Color.green}[1] - 🕹️\t New Game{Color.restore}\n')
+               print(f'{Color.red}[2] - 🚪 Exit{Color.restore}\n')
+               option = input(f'{Color.cyan}Option: ')
+              # print('\x1b[1;0m')
                match option:
                   case '1':
                      self.new_game()
                      break
                   case '2':
-                     print('\n👋 Goodbye!!!\n')
+                     print(f'\n{Color.yellow}👋 Goodbye!!!{Color.restore}\n')
                      break
                   case _:
                      continue
             except KeyboardInterrupt:  
-                sys.exit('\n👋 Goodbye!!!\n') 
+                sys.exit(f'\n{Color.yellow}👋 Goodbye!!!{Color.restore}\n') 
     
     def new_game(self):
         clear_screen()
