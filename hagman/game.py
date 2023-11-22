@@ -32,4 +32,6 @@ class Game:
         clear_screen()
         word = random.choice(self.words)
         hagman = Hagman(word, self.limit_fails)
-        hagman.play_game()
+        end = hagman.play_game()
+        if end:
+           self.start()

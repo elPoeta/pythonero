@@ -19,9 +19,9 @@ class Hagman:
              f"{first_common_pics}\n  |        \n  |        \n  |        \n{last_common_pic}",
              f"{first_common_pics}{Color.red}|{Color.restore}  \n  |        \n  |        \n  |        \n{last_common_pic}",
              f"{first_common_pics}{Color.red}|{Color.restore}  \n  |     {Color.red}O{Color.restore}  \n  |        \n  |        \n{last_common_pic}",
-             f"{first_common_pics}|  \n  |     {Color.red}O{Color.restore}  \n  |     {Color.red}|{Color.restore}  \n  |        \n{last_common_pic}",
-             f"{first_common_pics}|  \n  |     {Color.red}O{Color.restore}  \n  |    {Color.red}/|\ {Color.restore} \n  |        \n{last_common_pic}",
-             f"{first_common_pics}|  \n  |     {Color.red}O{Color.restore}  \n  |    {Color.red}/|\ {Color.restore} \n  |    {Color.red}/ \ {Color.restore}\n{last_common_pic}",
+             f"{first_common_pics}{Color.red}|{Color.restore}  \n  |     {Color.red}O{Color.restore}  \n  |     {Color.red}|{Color.restore}  \n  |        \n{last_common_pic}",
+             f"{first_common_pics}{Color.red}|{Color.restore}  \n  |     {Color.red}O{Color.restore}  \n  |    {Color.red}/|\ {Color.restore} \n  |        \n{last_common_pic}",
+             f"{first_common_pics}{Color.red}|{Color.restore}  \n  |     {Color.red}O{Color.restore}  \n  |    {Color.red}/|\ {Color.restore} \n  |    {Color.red}/ \ {Color.restore}\n{last_common_pic}",
         ]
         
     def print_pics(self, pos=0):
@@ -45,24 +45,24 @@ class Hagman:
                     break
             except KeyboardInterrupt:
                 break;    
-        self.check_winner()           
+        return self.check_winner()           
         
     def is_not_letter(self, guess):
         pattern = r"^[A-Za-z]*$"
         if len(guess) > 1 or not re.match(pattern, guess):
-          clear_screen()  
-          print(f'🚫 {Color.red}Invalid input. Enter a single letter{Color.restore}\n')
-          time.sleep(2)      
-          return True
+          return self.wrong_message('Invalid input. Enter a single letter') 
         return False  
           
     def is_guessed(self, guess):
         if guess in self.letters:
-            clear_screen()  
-            print(f'🚫 {Color.red}Oops! You already tried that guess, try again!{Color.restore}\n')
-            time.sleep(2)      
-            return True
+            return self.wrong_message('Oops! You already tried that guess, try again!') 
         return False
+    
+    def wrong_message(self, message):
+        clear_screen()  
+        print(f'🚫 {Color.red}{message}{Color.restore}\n')
+        time.sleep(2)      
+        return True
     
     def is_found_letters(self, guess):
         found_letter = False    
@@ -85,4 +85,7 @@ class Hagman:
         if self.win:
             print(f'{Color.green} 🎆 YOU WIN!{Color.restore}\n')
         else:
-            print(f'{Color.red} ❌ YOU LOSE!{Color.restore}\n')           
+            print(f'{Color.red} ❌ YOU LOSE!{Color.restore}\n')     
+        time.sleep(2.5)      
+        return True       
+    
