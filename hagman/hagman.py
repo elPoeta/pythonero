@@ -1,9 +1,10 @@
 import time
 import re
 from utils import clear_screen
-from color import Color
+
 class Hagman:
-    def __init__(self, word="hello", limit_fail=5):
+    def __init__(self, word="hello", limit_fail=5, color=None):
+        self.color = color
         self.word = list(' '.join(s for s in list(word.upper())))    
         self.fails = 0
         self.display = "_ " * len(word)
@@ -13,15 +14,15 @@ class Hagman:
         self.win = False
 
     def set_ascii_pics(self):
-        first_common_pics = f"   {Color.restore}_____      {Color.green}🧩 Py-Hagman 🧩 {Color.restore} \n  |     |  \n  |     |     ❌ {Color.red}%%fails%% {Color.restore}  📝 %%letters%%  \n  |     "
-        last_common_pic = f"__|__        {Color.cyan}%%display%% {Color.restore}\n"
+        first_common_pics = f"   {self.color.restore}_____      {self.color.green}🧩 Py-Hagman 🧩 {self.color.restore} \n  |     |  \n  |     |     ❌ {self.color.red}%%fails%% {self.color.restore}  📝 %%letters%%  \n  |     "
+        last_common_pic = f"__|__        {self.color.cyan}%%display%% {self.color.restore}\n"
         return [
              f"{first_common_pics}\n  |        \n  |        \n  |        \n{last_common_pic}",
-             f"{first_common_pics}{Color.red}|{Color.restore}  \n  |        \n  |        \n  |        \n{last_common_pic}",
-             f"{first_common_pics}{Color.red}|{Color.restore}  \n  |     {Color.red}O{Color.restore}  \n  |        \n  |        \n{last_common_pic}",
-             f"{first_common_pics}{Color.red}|{Color.restore}  \n  |     {Color.red}O{Color.restore}  \n  |     {Color.red}|{Color.restore}  \n  |        \n{last_common_pic}",
-             f"{first_common_pics}{Color.red}|{Color.restore}  \n  |     {Color.red}O{Color.restore}  \n  |    {Color.red}/|\ {Color.restore} \n  |        \n{last_common_pic}",
-             f"{first_common_pics}{Color.red}|{Color.restore}  \n  |     {Color.red}O{Color.restore}  \n  |    {Color.red}/|\ {Color.restore} \n  |    {Color.red}/ \ {Color.restore}\n{last_common_pic}",
+             f"{first_common_pics}{self.color.red}|{self.color.restore}  \n  |        \n  |        \n  |        \n{last_common_pic}",
+             f"{first_common_pics}{self.color.red}|{self.color.restore}  \n  |     {self.color.red}O{self.color.restore}  \n  |        \n  |        \n{last_common_pic}",
+             f"{first_common_pics}{self.color.red}|{self.color.restore}  \n  |     {self.color.red}O{self.color.restore}  \n  |     {self.color.red}|{self.color.restore}  \n  |        \n{last_common_pic}",
+             f"{first_common_pics}{self.color.red}|{self.color.restore}  \n  |     {self.color.red}O{self.color.restore}  \n  |    {self.color.red}/|\ {self.color.restore} \n  |        \n{last_common_pic}",
+             f"{first_common_pics}{self.color.red}|{self.color.restore}  \n  |     {self.color.red}O{self.color.restore}  \n  |    {self.color.red}/|\ {self.color.restore} \n  |    {self.color.red}/ \ {self.color.restore}\n{last_common_pic}",
         ]
         
     def print_pics(self, pos=0):
@@ -35,7 +36,7 @@ class Hagman:
         while self.fails < self.limit_fail:
             try:
                 self.print_pics(self.fails)
-                guess = input(f'💬 {Color.yellow}Enter your guess: ').strip().upper()
+                guess = input(f'💬 {self.color.yellow}Enter your guess: ').strip().upper()
                 if self.is_not_letter(guess):
                     continue
                 if(self.is_guessed(guess)):
@@ -60,7 +61,7 @@ class Hagman:
     
     def wrong_message(self, message):
         clear_screen()  
-        print(f'🚫 {Color.red}{message}{Color.restore}\n')
+        print(f'🚫 {self.color.red}{message}{self.color.restore}\n')
         time.sleep(2)      
         return True
     
@@ -83,9 +84,9 @@ class Hagman:
         time.sleep(1)
         clear_screen()
         if self.win:
-            print(f'{Color.green} 🎆 YOU WIN!{Color.restore}\n')
+            print(f'{self.color.green} 🎆 YOU WIN!{self.color.restore}\n')
         else:
-            print(f'{Color.red} ❌ YOU LOSE!{Color.restore}\n')     
+            print(f'{self.color.red} ❌ YOU LOSE!{self.color.restore}\n')     
         time.sleep(2.5)      
         return True       
     
