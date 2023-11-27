@@ -49,7 +49,7 @@ class Hagman:
         return self.check_winner()           
         
     def is_not_letter(self, guess):
-        pattern = r"^[A-Za-z]*$"
+        pattern = r"^[A-Za-z']*$"
         if len(guess) > 1 or not re.match(pattern, guess):
           return self.wrong_message('Invalid input. Enter a single letter') 
         return False  
