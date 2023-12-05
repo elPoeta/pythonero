@@ -3,5 +3,6 @@
   "python.languageServer": "Jedi",
   "python.terminal.activateEnvironment": true,
   "editor.defaultFormatter": "ms-python.vscode-pylance",
-  "pythonIndent.useTabOnHangingIndent": true
+  "pythonIndent.useTabOnHangingIndent": true,
+  "editor.fontLigatures": true,
 }
