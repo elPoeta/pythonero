@@ -8,10 +8,8 @@ words = []
 
 
 def main():
-    global pick_word
-    global words
     clear_screen()
-    words = get_words()
+    set_words()
     game = Game(pick_word)
     game.start()
 
@@ -33,6 +31,11 @@ def get_words():
         return words
     except FileNotFoundError:
         sys.exit(f"File {file_name} does not exist")
+
+
+def set_words():
+    global words
+    words = get_words()
 
 
 def pick_word():
