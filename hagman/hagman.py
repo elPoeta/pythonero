@@ -1,18 +1,15 @@
 import time
 import re
 from utils import clear_screen
-from color import Color
 
 
 class Hagman:
-    def __init__(
-        self, word: str = "hello", limit_fail: int = 5, color: Color = Color()
-    ):
+    def __init__(self, word, color):
         self.color = color
         self.word = list(" ".join(s for s in list(word.upper())))
         self.fails = 0
         self.display = "_ " * len(word)
-        self.limit_fail = limit_fail
+        self.lives = 5
         self.letters = []
         self.ascii_pics = self.set_ascii_pics()
         self.win = False
@@ -41,7 +38,7 @@ class Hagman:
         )
 
     def play_game(self):
-        while self.fails < self.limit_fail:
+        while self.fails < self.lives:
             try:
                 self.print_pics(self.fails)
                 guess = (
@@ -79,9 +76,9 @@ class Hagman:
         found_letter = False
         for index, letter in enumerate(self.word):
             if guess == letter:
-                self.display = self.display[:index] + guess + self.display[index + 1 :]
+                self.display = self.display[:index] + guess + self.display[index + 1:]
                 found_letter = True
-        if not "_" in list(self.display):
+        if "_" not in list(self.display):
             self.win = True
             return True
         if not found_letter:
