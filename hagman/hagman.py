@@ -24,8 +24,8 @@ class Hagman:
             f"{first_common_pics}{self.color.red}|{self.color.restore}  \n  |        \n  |        \n  |        \n{last_common_pic}",
             f"{first_common_pics}{self.color.red}|{self.color.restore}  \n  |     {self.color.red}O{self.color.restore}  \n  |        \n  |        \n{last_common_pic}",
             f"{first_common_pics}{self.color.red}|{self.color.restore}  \n  |     {self.color.red}O{self.color.restore}  \n  |     {self.color.red}|{self.color.restore}  \n  |        \n{last_common_pic}",
-            f"{first_common_pics}{self.color.red}|{self.color.restore}  \n  |     {self.color.red}O{self.color.restore}  \n  |    {self.color.red}/|\ {self.color.restore} \n  |        \n{last_common_pic}",
-            f"{first_common_pics}{self.color.red}|{self.color.restore}  \n  |     {self.color.red}O{self.color.restore}  \n  |    {self.color.red}/|\ {self.color.restore} \n  |    {self.color.red}/ \ {self.color.restore}\n{last_common_pic}",
+            f"{first_common_pics}{self.color.red}|{self.color.restore}  \n  |     {self.color.red}O{self.color.restore}  \n  |    {self.color.red}/|\\ {self.color.restore} \n  |        \n{last_common_pic}",
+            f"{first_common_pics}{self.color.red}|{self.color.restore}  \n  |     {self.color.red}O{self.color.restore}  \n  |    {self.color.red}/|\\ {self.color.restore} \n  |    {self.color.red}/ \\ {self.color.restore}\n{last_common_pic}",
         ]
 
     def print_pics(self, pos: int = 0):
@@ -76,7 +76,7 @@ class Hagman:
         found_letter = False
         for index, letter in enumerate(self.word):
             if guess == letter:
-                self.display = self.display[:index] + guess + self.display[index + 1:]
+                self.display = self.display[:index] + guess + self.display[index + 1 :]
                 found_letter = True
         if "_" not in list(self.display):
             self.win = True
